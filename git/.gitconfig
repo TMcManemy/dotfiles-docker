@@ -1,0 +1,12 @@
+[user]
+        name = Tim McManemy
+        email = tim.mcmanemy@gmail.com
+[alias]
+	st = status
+	co = checkout
+	di = diff
+	ci = commit
+	br = branch
+	p = push origin HEAD -u
+[core]
+  excludesfile = /root/.gitignore
