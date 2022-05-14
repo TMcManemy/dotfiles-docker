@@ -1,4 +1,4 @@
-FROM apline 3.14
+FROM alpine:3.14
 
 RUN echo 'installing base packages...' && apk update && apk add --no-cache \
   bash \
@@ -22,7 +22,7 @@ ENV PATH=$PATH:/usr/local/go/bin
 
 RUN echo 'installing packages needed to compile extensions...' && apk add --no-cache \
   gcc \
-  libiffi-dev \
+  libffi-dev \
   make \
   musl-dev \
   python3-dev \
@@ -37,7 +37,7 @@ COPY bash/.bash_profile bash/.bashrc /root/
 RUN echo 'installing git...' && apk add --no-cache \
   git
 COPY git/.gitconfig git/.gitignore /root/
-RUN wget -O /root/.git-prompt.sh https://raw.githubcontent.com/git/git/master/contrib/completion/git-prompt.sh
+RUN wget -O /root/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 RUN echo 'installing vim...' && apk add --no-cache \
   vim
@@ -53,7 +53,7 @@ RUN echo 'installing tmux...' && apk add --no-cache \
   tmux
 COPY tmux/.tmux.conf /root/.tmux.conf
 
-RUN 'installing tmuxinator...' && gem install tmuxinator && \
+RUN echo 'installing tmuxinator...' && gem install tmuxinator && \
   mkdir /root/.tmuxinator
 COPY tmuxinator/default.yml /root/.tmuxinator/default.yml
 ENV EDITOR=vim SHELL=/bin/bash
@@ -69,7 +69,7 @@ RUN echo 'installing tools...' && apk add --no-cache \
   tig \ 
   util-linux \
   less && \
-  curl https://beyondgrep.com/ack-v3.5.0 > /usr/local/bin/ack && chmod 0755 /usr/local/bin/ack && \
+  #curl https://beyondgrep.com/ack-v3.5.0 > /usr/local/bin/ack && chmod 0755 /usr/local/bin/ack && \
   az extension add --name resource-graph && \  
   az extension add --name account
 
